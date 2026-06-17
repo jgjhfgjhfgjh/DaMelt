@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
+@theme inline {
+  /* Brand palette */
+  --color-brand: #fb49ad;
+  --color-brand-700: #c42e83;
+  --color-brand-900: #7a1a51;
+  --color-cheese: #ffc72c;
+  --color-cheese-700: #e0a500;
+  --color-ink: #2b2724;
+  --color-cream: #fff3f9;
+  --color-paper: #ffffff;
+
+  /* Fonts (wired in layout via next/font) */
+  --font-display: var(--font-anton);
+  --font-brand: var(--font-fredoka);
+  --font-sans: var(--font-inter);
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #2b2724;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Melty 3D wordmark, approximating the DaMelt logo treatment */
+.wordmark {
+  font-family: var(--font-brand), sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  color: #ffffff;
+  -webkit-text-stroke: 2px #2b2724;
+  paint-order: stroke fill;
+  text-shadow: 2px 2px 0 #2b2724;
+  transform: skewX(-4deg);
+  display: inline-block;
+}
+
+.headline {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.5px;
+  line-height: 0.92;
+}
+
+/* Hard-shadow brand button */
+.btn-pop {
+  box-shadow: 3px 3px 0 #2b2724;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.btn-pop:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #2b2724;
+}
+.btn-pop:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #2b2724;
+}
+
+/* Scrolling brand marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 18s linear infinite;
 }
